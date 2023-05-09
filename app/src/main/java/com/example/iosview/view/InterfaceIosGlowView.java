@@ -10,4 +10,7 @@ public interface InterfaceIosGlowView {
     void setGlowRed();
 
     void setGlowBlue();
+
+    void setNightTheme();
+    void setLightTheme();
 }

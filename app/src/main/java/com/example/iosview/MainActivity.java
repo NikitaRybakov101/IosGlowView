@@ -3,6 +3,8 @@ package com.example.iosview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityManager;
+import android.app.SearchableInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,9 +27,22 @@ public class MainActivity extends AppCompatActivity {
         initSearchIosView2();
         initSearchIosView3();
 
-        binding.iosInput.setGlowRed();
-        binding.iosInput2.setGlowBlue();
-        binding.iosInput3.setGlowBlue();
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+
+                binding.iosInput.setLightTheme();
+                binding.iosInput2.setLightTheme();
+                binding.iosInput3.setLightTheme();
+
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+
+                binding.iosInput.setNightTheme();
+                binding.iosInput2.setNightTheme();
+                binding.iosInput3.setNightTheme();
+                break;
+        }
     }
 
     private void initSearchIosView() {
@@ -48,36 +63,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSearchIosView2() {
-        binding.search2.setOnQueryTextFocusChangeListener((view,isFocus) -> {
+        binding.search2.setOnFocusChangeListener((view,isFocus) -> {
 
             if (isFocus) {
                 binding.iosInput2.animElevationUp();
             } else {
                 binding.iosInput2.animElevationDown();
-           //     binding.search2.onActionViewCollapsed();
             }
-        });
-
-
-        binding.search2.setOnClickListener(view -> {
-            binding.search2.onActionViewExpanded();
         });
     }
 
     private void initSearchIosView3() {
-        binding.search3.setOnQueryTextFocusChangeListener((view,isFocus) -> {
+        binding.search3.setOnFocusChangeListener((view,isFocus) -> {
 
             if (isFocus) {
                 binding.iosInput3.animElevationUp();
             } else {
                 binding.iosInput3.animElevationDown();
-           //     binding.search3.onActionViewCollapsed();
             }
-        });
-
-
-        binding.search3.setOnClickListener(view -> {
-            binding.search3.onActionViewExpanded();
         });
     }
 }

@@ -33,6 +33,8 @@ public class IosGlowView extends View implements InterfaceIosGlowView {
     private int glowColor = colorBlue;
     private int glowStroke = Color.BLUE;
 
+    private int backgroundColor = Color.WHITE;
+
     private final float cornedRad = convertDpToPixels(24);
     private final float strokeWidth = 3f;
     private final float maxElevation = 40f;
@@ -75,7 +77,7 @@ public class IosGlowView extends View implements InterfaceIosGlowView {
     }
 
     private void drawRect(Canvas canvas) {
-        paint.setColor(Color.WHITE);
+        paint.setColor(backgroundColor);
         paint.setShadowLayer(elevation, 0f, 0f, glowColor);
 
         canvas.drawRoundRect(new RectF(padding, padding,getWidth() - padding,getHeight() - padding), cornedRad,cornedRad,paint);
@@ -119,6 +121,18 @@ public class IosGlowView extends View implements InterfaceIosGlowView {
     public void setGlowBlue() {
         this.glowColor = colorBlue;
         this.glowStroke = Color.BLUE;
+    }
+
+    @Override
+    public void setNightTheme() {
+        setGlowRed();
+        backgroundColor = Color.rgb(50,50,50);
+    }
+
+    @Override
+    public void setLightTheme() {
+        setGlowBlue();
+        backgroundColor = Color.WHITE;
     }
 
     private int convertDpToPixels(int dp) {
