@@ -1,17 +1,15 @@
 package com.example.iosview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import android.app.ActivityManager;
-import android.app.SearchableInfo;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-
+import android.os.Handler;
+import android.os.Looper;
 
 import com.example.iosview.databinding.ActivityMainBinding;
+import com.example.iosview.splashScreenFragment.SplashScreenFragment;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -43,6 +41,19 @@ public class MainActivity extends AppCompatActivity {
                 binding.iosInput3.setNightTheme();
                 break;
         }
+
+
+        Fragment fragment = new SplashScreenFragment();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,fragment)
+                .commit();
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> getSupportFragmentManager()
+                .beginTransaction()
+                .remove(fragment)
+                .commit(), 4000);
     }
 
     private void initSearchIosView() {
