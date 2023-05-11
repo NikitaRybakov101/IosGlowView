@@ -12,7 +12,7 @@ class CustomTextView @JvmOverloads constructor(context : Context, attrs : Attrib
         isAntiAlias = true
     }
 
-    private var string = ""
+    private var string = "000"
     private var isStart = false
 
     private lateinit var canvas : Canvas
